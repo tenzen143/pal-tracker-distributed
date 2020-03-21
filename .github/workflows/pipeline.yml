@@ -13,10 +13,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Create test database
-        run: |
-          mysql -uroot -proot < databases/create_databases.sql
-          ./gradlew testMigrate
+- name: Create test database
+  run: |
+      sudo chmod +x gradlew && sudo /etc/init.d/mysql start && mysql -uroot -proot < databases/create_databases.sql
+  ./gradlew testMigrate
       - name: Build with Gradle
         run: ./gradlew clean build
       - name: Publish allocations artifact

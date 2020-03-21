@@ -2,7 +2,7 @@ import io.pivotal.pal.tracker.gradlebuild.DependenciesGraphPlugin
 
 buildscript {
     ext {
-        springBootVersion = "2.0.2.RELEASE"
+        springBootVersion = "2.0.6.RELEASE"
         springVersion = "5.0.9.RELEASE"
         mysqlVersion = "8.0.13"
         jacksonVersion = "2.9.7"
@@ -16,7 +16,7 @@ buildscript {
         jsonPathVersion = "2.4.0"
         springCloudVersion = "Finchley.RELEASE"
         springCloudServicesClientLibrariesVersion = "2.0.2.RELEASE"
-        springCloudCommons = "2.0.0.RELEASE"
+        springCloudCommonsVersion = "2.0.0.RELEASE"
     }
 
     repositories {
@@ -44,6 +44,7 @@ subprojects {
     }
 
     dependencies {
+        compile "io.github.resilience4j:resilience4j-spring-boot2:1.2.0"
         compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"

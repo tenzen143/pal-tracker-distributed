@@ -13,10 +13,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-- name: Create test database
-  run: |
-      sudo chmod +x gradlew && sudo /etc/init.d/mysql start && mysql -uroot -proot < databases/create_databases.sql
-  ./gradlew testMigrate
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      - name: Create test database
+        run: |
+          sudo chmod +x gradlew && sudo /etc/init.d/mysql start && mysql -uroot -proot < databases/create_databases.sql
+          ./gradlew testMigrate
       - name: Build with Gradle
         run: ./gradlew clean build
       - name: Publish allocations artifact
@@ -167,6 +169,8 @@ jobs:
           echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
           sudo apt-get update
           sudo apt-get install cf-cli
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
       - name: Migate tracker-database
         run: |
           cf api "$CF_API_URL"
